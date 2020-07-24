@@ -25,8 +25,6 @@ Run the tests `npm test`
 
 When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
 
-## You will need to run the following lines or tests will not function:
-
-npm i express morgan cors dotenv helmet
+## You will need to install the following dependencies for tests:
 
 npm i mocha chai supertest nodemon -D
