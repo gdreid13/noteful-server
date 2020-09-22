@@ -4,29 +4,26 @@ const NotesService = {
   getNotes(db) {
     return db
       .from('notes')
-      .select(
-        'notes.id',
-        'notes.name',
-        'notes.content',
-        'notes.modified'
-      )
-      .groupBy('notes.folder_id')
+      .select('*')
+      .groupBy('notes.id', 'notes.folder_id')
   },
 
   insertNote(db, newNote) {
     return db
+      .from('notes')
       .insert(newNote)
-      .into('notes')
   },
 
   deleteNote(db, noteId) {
     return db
+      .from('notes')
       .where({ noteId })
       .delete()
   },
 
   updateNote(db, noteId, newNoteFields) {
     return db
+      .from('notes')
       .where({ noteId })
       .update(newNoteFields)
   }

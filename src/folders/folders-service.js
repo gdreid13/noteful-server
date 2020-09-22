@@ -3,12 +3,9 @@ const xss = require('xss')
 const FoldersService = {
   getFolders(db) {
     return db
-      .from('folders AS fold')
-      .select(
-        'fold.id',
-        'fold.name'
-      )
-      .groupBy('fold.id')
+      .from('folders')
+      .select('*')
+      .groupBy('id')
   },
 
   getFolderById(knex, id) {
