@@ -49,7 +49,7 @@ notesRouter
 
   notesRouter
     .route('/:note_id')
-    .all((req, res, next) => {
+/*     .all((req, res, next) => {
       NotesService.getNoteById(
         req.app.get('db'),
         req.params.note_id
@@ -64,16 +64,29 @@ notesRouter
         }
       })
       .catch(next)
-    })
+    }) */
     .get((req, res, next) => {
-      res.json(serializeNote(res.note))
+      console.log(req.params)
+      const id = req.params.note_id
+      console.log(id)
+      NotesService.getNoteById(
+        req.app.get('db'),
+        id
+      )
+      .then(note => {
+        res.status(201).json(note)
+      })
+      .catch(next) 
     })
     .delete((req, res, next) => {
+      console.log(req.params)
+      const id = req.params.note_id
+      console.log(id)
       NotesService.deleteNote(
         req.app.get('db'),
-        req.params.note_id
+        id
       )
-      .then(numRowsAffected => {
+      .then((note)=> {
         res.status(204).end()
       })
       .catch(next)

@@ -1,11 +1,16 @@
-const xss = require('xss')
-
 const NotesService = {
   getNotes(db) {
     return db
       .from('notes')
       .select('*')
       .groupBy('notes.id', 'notes.folder_id')
+  },
+
+  getNoteById(db, noteId) {
+    return db
+      .select('*')
+      .from('notes')
+      .where('id', noteId);
   },
 
   insertNote(db, newNote) {
@@ -15,9 +20,8 @@ const NotesService = {
   },
 
   deleteNote(db, noteId) {
-    return db
-      .from('notes')
-      .where({ noteId })
+    return db('notes')
+      .where('id', noteId)
       .delete()
   },
 
